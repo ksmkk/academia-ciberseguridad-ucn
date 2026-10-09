@@ -1,7 +1,15 @@
 # Máquinas
 
-Aquí reunimos las máquinas y laboratorios utilizados por la Academia.
+Esta sección reúne los laboratorios que hemos trabajado y enseñado en la Academia.
 
-Cada ficha documenta el objetivo, los conocimientos necesarios, el entorno, las herramientas y los aprendizajes principales sin convertir la práctica en una lista de comandos para copiar.
+La idea no es copiar writeups de terceros, sino tomar los ejercicios que realmente utilizamos en clase, documentar qué conceptos reforzamos con cada uno y dejar una referencia clara para volver a practicarlos.
 
-Las soluciones completas, flags y material reservado para instructores se mantienen separados del contenido público.
+## Laboratorios trabajados
+
+* BreakMySSH — DockerLabs
+* FirstHacking — DockerLabs
+* Estudio Legal — laboratorio web de la Academia
+
+Cada ficha incluye objetivos, metodología, herramientas, puntos de aprendizaje y una referencia al material original utilizado durante la clase.
+
+Cuando una práctica contiene una solución completa, la señalamos claramente para evitar spoilers a quienes todavía quieran resolverla por su cuenta.

@@ -24,6 +24,7 @@
   * [BreakMySSH](maquinas/breakmyssh.md)
   * [FirstHacking](maquinas/firsthacking.md)
   * [Plantilla de máquina](maquinas/plantilla.md)
+  * [Estudio Legal](maquinas/estudio-legal.md)
 * [CTFs](ctfs/README.md)
   * [CTF internos](ctfs/ctf-internos.md)
   * [ElquiHack](ctfs/elquihack.md)

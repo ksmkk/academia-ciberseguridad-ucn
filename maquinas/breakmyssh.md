@@ -3,80 +3,143 @@
 **Plataforma:** DockerLabs\
 **Dificultad:** Muy fácil\
 **Área:** Reconocimiento, SSH y credenciales débiles\
-**Material de referencia:** [Writeup utilizado en clase](https://github.com/PabloSanchezIglesias/DockerLabs/blob/main/Muy%20facil/BreakMySSH.md)
+**Material seguido en clase:** [Writeup de referencia](https://github.com/PabloSanchezIglesias/DockerLabs/blob/main/Muy%20facil/BreakMySSH.md)
 
-## Qué trabajamos con esta máquina
+> La IP del contenedor puede cambiar según el entorno. En el writeup de referencia se utiliza `172.17.0.2`.
 
-BreakMySSH fue una de las máquinas utilizadas para introducir una metodología sencilla de pentesting sobre servicios de red. El objetivo principal fue aprender a pasar de un escaneo inicial a una hipótesis concreta de ataque.
+## Objetivo
 
-## Reconocimiento
+Identificar la superficie expuesta, enumerar el servicio SSH, investigar posibles debilidades, validar un usuario y demostrar el impacto de una contraseña débil dentro del laboratorio.
 
-El writeup de referencia comienza con un escaneo completo de puertos mediante `nmap`:
+## Procedimiento
+
+### 1. Reconocimiento completo de puertos
+
+Comenzamos buscando todos los puertos TCP abiertos:
 
 ```bash
 sudo nmap -p- --open -sS --min-rate 5000 -vvv -n -Pn 172.17.0.2 -oG escaneo
 ```
 
-El resultado muestra un único puerto expuesto: **22/TCP**, correspondiente a SSH. A partir de ahí, la superficie de ataque queda claramente acotada.
+Qué buscamos:
 
-Después se realiza enumeración específica del servicio:
+* puertos abiertos;
+* cantidad de servicios expuestos;
+* TTL orientativo del sistema operativo;
+* una primera idea de la superficie de ataque.
+
+En esta máquina aparece únicamente el **puerto 22/TCP**, correspondiente a SSH. Esto nos indica que el análisis debe centrarse en ese servicio.
+
+### 2. Enumeración del servicio SSH
+
+Con el puerto identificado, realizamos un escaneo más específico:
 
 ```bash
 sudo nmap -sCV -p22 172.17.0.2 -oN allPorts
 ```
 
-La máquina expone **OpenSSH 7.7**.
+`-sC` ejecuta scripts por defecto de Nmap y `-sV` intenta identificar la versión del servicio.
 
-## Investigación de la versión
+El laboratorio expone:
 
-A partir de la versión detectada, el laboratorio introduce el uso de `searchsploit` para investigar vulnerabilidades conocidas:
+```
+22/tcp  open  ssh  OpenSSH 7.7
+```
+
+### 3. Investigar la versión detectada
+
+Con la versión obtenida, buscamos referencias públicas:
 
 ```bash
 searchsploit OpenSSH 7.7
 ```
 
-El writeup utilizado en clase relaciona esta versión con técnicas de enumeración de usuarios y con **CVE-2018-15473**. Esta parte es útil para enseñar que encontrar una versión no implica automáticamente que exista una explotación remota directa: primero hay que investigar qué condición, impacto y alcance tiene cada vulnerabilidad.
+En el writeup utilizado en clase se investiga la enumeración de usuarios asociada a **CVE-2018-15473**.
 
-## Validación de usuarios
+La lección importante aquí es que encontrar una versión no significa lanzar automáticamente un exploit: primero debemos entender qué vulnerabilidad existe, qué condición necesita y qué información puede entregarnos.
 
-La práctica continúa probando la existencia de un usuario válido sobre SSH. En el writeup de referencia se valida el usuario `root` antes de avanzar al siguiente paso.
+### 4. Preparar el script de enumeración
 
-## Credenciales débiles
+El writeup toma como referencia el exploit público asociado al EDB-ID `45233` y lo ejecuta localmente para validar usuarios del servidor SSH.
 
-Con un usuario válido identificado, se utiliza Hydra con un diccionario para demostrar el impacto de una contraseña débil en un servicio SSH expuesto:
+Ejemplo utilizado:
+
+```bash
+python3 exploit.py -p 22 172.17.0.2 root
+```
+
+El resultado confirma que `root` es un usuario válido en el laboratorio.
+
+### 5. Probar la resistencia de la contraseña
+
+Una vez conocido un usuario válido, se demuestra el riesgo de una contraseña débil mediante Hydra y el diccionario `rockyou.txt`:
 
 ```bash
 hydra -l root -P /usr/share/wordlists/rockyou.txt 172.17.0.2 ssh -t 15
 ```
 
-El laboratorio de DockerLabs utiliza una credencial deliberadamente vulnerable para fines educativos.
+En esta máquina de práctica, Hydra encuentra la credencial deliberadamente débil:
 
-## Acceso y verificación
+```
+Usuario: root
+Contraseña: estrella
+```
 
-Una vez obtenida la credencial de laboratorio, el acceso se valida mediante SSH y comandos básicos de identificación:
+Esto es parte del diseño vulnerable del laboratorio y no una credencial real.
+
+### 6. Acceder mediante SSH
+
+Validamos la credencial obtenida:
 
 ```bash
 ssh root@172.17.0.2
+```
+
+Cuando el sistema solicita la contraseña usamos la obtenida en el paso anterior.
+
+### 7. Verificar el acceso
+
+Ya dentro del contenedor comprobamos identidad, privilegios y hostname:
+
+```bash
 whoami
 id
 hostname
 ```
 
-## Aprendizajes principales
+El resultado confirma acceso como `root`.
 
-* Un escaneo inicial sirve para reducir la superficie de ataque.
-* La enumeración de versiones debe ir seguida de investigación y validación.
-* La existencia de un usuario válido puede reducir drásticamente el espacio de búsqueda de un ataque de credenciales.
-* SSH no es inseguro por sí mismo; el problema del laboratorio está en la combinación de exposición, usuario privilegiado y contraseña débil.
-* Obtener acceso no cierra el ejercicio: hay que entender qué control defensivo habría evitado el compromiso.
+## Qué aprendimos
+
+El recorrido completo queda así:
+
+```
+Escaneo de puertos
+        ↓
+Enumeración de SSH
+        ↓
+Identificación de versión
+        ↓
+Investigación de vulnerabilidades
+        ↓
+Enumeración de usuario
+        ↓
+Ataque de credenciales en laboratorio
+        ↓
+Acceso SSH
+        ↓
+Verificación de privilegios
+```
+
+Más allá de conseguir una shell, esta máquina sirve para entender por qué combinar un servicio expuesto, un usuario privilegiado y una contraseña débil puede terminar en compromiso total.
 
 ## Mitigación
 
-* Deshabilitar acceso SSH directo como `root` cuando no sea estrictamente necesario.
-* Utilizar autenticación por clave y restringir el uso de contraseñas.
-* Aplicar políticas de contraseñas robustas.
-* Implementar rate limiting, fail2ban u otros mecanismos contra intentos repetidos.
+* Deshabilitar login SSH directo como `root` cuando no sea necesario.
+* Preferir autenticación mediante claves.
+* Deshabilitar contraseñas débiles y aplicar políticas robustas.
+* Implementar controles frente a intentos repetidos, como Fail2ban o rate limiting.
 * Mantener OpenSSH actualizado.
-* Restringir el servicio a redes o usuarios que realmente lo necesiten.
+* Restringir SSH por firewall, VPN o allowlists cuando sea posible.
 
-> Esta página documenta una práctica deliberadamente vulnerable y autorizada. Los comandos deben utilizarse únicamente en laboratorios o sistemas donde exista permiso explícito.
+> Todo este procedimiento corresponde a un laboratorio deliberadamente vulnerable. Debe reproducirse únicamente en entornos propios o expresamente autorizados.

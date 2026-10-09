@@ -1,15 +1,14 @@
 # Máquinas
 
-Esta sección reúne los laboratorios que hemos trabajado y enseñado en la Academia.
+Esta sección reúne las máquinas que hemos trabajado y enseñado en la Academia, principalmente laboratorios de DockerLabs.
 
-La idea no es copiar writeups de terceros, sino tomar los ejercicios que realmente utilizamos en clase, documentar qué conceptos reforzamos con cada uno y dejar una referencia clara para volver a practicarlos.
+La idea no es copiar writeups de terceros, sino tomar los ejercicios que realmente utilizamos en clase, documentar el procedimiento que seguimos, explicar qué conceptos reforzamos y dejar una referencia clara para volver a practicarlos.
 
-## Laboratorios trabajados
+## Máquinas trabajadas
 
 * BreakMySSH — DockerLabs
 * FirstHacking — DockerLabs
-* Estudio Legal — laboratorio web de la Academia
 
-Cada ficha incluye objetivos, metodología, herramientas, puntos de aprendizaje y una referencia al material original utilizado durante la clase.
+Los laboratorios propios del horario avanzado, como **Estudio Legal**, se documentan dentro de **Nivel Avanzado** para mantener separadas las rutas de aprendizaje.
 
-Cuando una práctica contiene una solución completa, la señalamos claramente para evitar spoilers a quienes todavía quieran resolverla por su cuenta.
+Cada ficha incluye procedimiento, comandos, explicación de los resultados, puntos de aprendizaje y mitigación.

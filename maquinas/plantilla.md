@@ -1,63 +1,65 @@
-# Nombre de la máquina
+# Plantilla de máquina
 
-**Plataforma:**  
-**Nivel:** Principiante / Intermedio / Avanzado  
-**Categoría:** Web / Red / Linux / Windows / AD / Cloud / IA / Forense  
-**Responsable:**  
-**Estado:**  
+Utiliza esta estructura como base para documentar nuevos laboratorios.
+
+## Información general
+
+**Plataforma:**\
+**Nivel:** Principiante / Intermedio / Avanzado\
+**Categoría:** Web / Red / Linux / Windows / AD / Cloud / IA / Forense\
+**Responsable:**\
+**Estado:** Pendiente / En preparación / Lista / Archivada
 
 ## Descripción
-Breve descripción sin spoilers.
+
+Breve descripción del laboratorio sin spoilers.
 
 ## Objetivos de aprendizaje
-- 
-- 
-- 
+
+*
+*
+*
 
 ## Prerrequisitos
-- 
-- 
+
+*
+*
 
 ## Entorno
-| Dato | Valor |
-|---|---|
-| IP / Hostname | |
-| Puertos | |
-| Sistema | |
-| Plataforma | |
 
-## Credenciales de laboratorio
-> Solo credenciales creadas específicamente para este ejercicio.
-
-| Usuario | Contraseña | Rol |
-|---|---|---|
-| | | |
+| Dato               | Valor |
+| ------------------ | ----- |
+| IP / Hostname      |       |
+| Puertos relevantes |       |
+| Sistema            |       |
+| Plataforma         |       |
 
 ## Herramientas recomendadas
-- 
-- 
+
+*
+*
 
 ## Reconocimiento
-Qué deberían observar primero.
+
+Describe qué información inicial debería obtenerse y por qué es relevante.
 
 ## Challenge
-Objetivo del estudiante sin revelar la solución.
+
+Define el objetivo del estudiante sin revelar la solución.
 
 ## Pistas
-<details>
-<summary>Pista 1</summary>
 
-Escribe aquí una pista progresiva.
-
-</details>
+Las pistas deben ser progresivas. La primera debería orientar el razonamiento sin entregar directamente el vector.
 
 ## Mitigación
-- 
-- 
 
-## Flags / evidencia
-- Flag 1:
-- Flag 2:
+*
+*
+
+## Evidencia o flags
+
+Mantener esta sección fuera de la versión pública cuando el desafío siga activo.
 
 ## Notas del instructor
-Información interna para preparar la clase.
+
+Información de preparación, dificultades esperadas y puntos que vale la pena discutir durante la clase.

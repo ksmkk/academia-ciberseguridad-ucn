@@ -1,19 +1,19 @@
 # FirstHacking
 
-**Plataforma:** DockerLabs  
-**Nivel:** Principiante  
-**Área:** FTP y vulnerabilidades conocidas
+**Plataforma:** DockerLabs\
+**Nivel sugerido:** Principiante\
+**Área:** FTP, enumeración y vulnerabilidades conocidas
 
 ## Objetivos
-- Reconocimiento de puertos.
-- Identificación de versiones.
-- Investigación de vulnerabilidades conocidas.
-- Comprender la importancia del parchado.
 
-## Herramientas
-- nmap
-- cliente FTP
-- fuentes públicas de CVE/advisories
+* Identificar puertos y servicios disponibles.
+* Obtener información sobre las versiones expuestas.
+* Investigar vulnerabilidades conocidas asociadas al servicio.
+* Validar el hallazgo dentro del entorno controlado.
+* Comprender la importancia del parchado y la gestión de versiones.
 
-## Credenciales
-Agregar solo si el laboratorio las requiere.
+## Enfoque
+
+El laboratorio conecta la enumeración técnica con la investigación de vulnerabilidades. El objetivo no es simplemente conseguir acceso, sino entender qué información permitió detectar el problema y cómo podría evitarse.
+
+No se incluye la solución completa en esta página.

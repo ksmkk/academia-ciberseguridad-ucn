@@ -1,22 +1,23 @@
 # BreakMySSH
 
-**Plataforma:** DockerLabs  
-**Nivel:** Principiante  
-**Área:** Reconocimiento, enumeración y SSH
+**Plataforma:** DockerLabs\
+**Nivel sugerido:** Principiante\
+**Área:** SSH, reconocimiento y credenciales
 
 ## Objetivos
-- Identificar puertos abiertos.
-- Enumerar servicios.
-- Analizar SSH como superficie de ataque.
-- Entender el impacto de credenciales débiles.
-- Proponer mitigaciones.
 
-## Herramientas
-- nmap
-- ssh
+* Realizar reconocimiento inicial del objetivo.
+* Identificar puertos y servicios expuestos.
+* Analizar SSH como superficie de ataque.
+* Comprender el riesgo asociado a credenciales débiles.
+* Relacionar la explotación con medidas concretas de mitigación.
 
-## Credenciales
-Agregar solo si forman parte deliberada del laboratorio.
+## Herramientas sugeridas
 
-## Challenge
-Completar reconocimiento, acceso controlado y mitigación sin spoilers en la portada.
+`nmap`, cliente `ssh` y herramientas de enumeración permitidas dentro del laboratorio.
+
+## Enfoque
+
+La máquina permite practicar una metodología básica de pentesting: reconocimiento, enumeración, formulación de una hipótesis, validación controlada y análisis de la mitigación.
+
+No se incluyen credenciales ni la solución completa en esta página.
